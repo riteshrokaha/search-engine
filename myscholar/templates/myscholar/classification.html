@@ -1,0 +1,28 @@
+{% extends 'myscholar/base.html' %}
+
+{% block title %}
+  My Scholar - Classification
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div>
+        <div class="">
+          {% if sentence %}
+            <input class="form-control" type="text" name="sentence" value="{{ sentence }}" />
+          {% else %}
+            <input class="form-control" type="text" name="sentence" placeholder="Type Your sentence" />
+          {% endif %}
+        </div>
+        <div class="my-3 text-center">
+          <input class="btn btn-outline-info" type="submit" value="Classify" />
+        </div>
+      </div>
+    </form>
+  </div>
+  {% if prediction %}
+    <div class="container text-center alert alert-info">{{ prediction }}</div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'myscholar/base.html' %}
+
+{% block title %}
+  My Scholar - Home Page
+{% endblock %}
+
+{% block content %}
+  <div class="container w-50 mt-5">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-10">
+          {% if search_keyword %}
+            <input class="form-control" type="text" name="keyword" value="{{ search_keyword }}" />
+            {% else %}
+            <input class="form-control" type="text" name="keyword" placeholder="Type Your Keyword" />
+          {% endif %}
+        </div>
+        <div class="col-md-2 text-center">
+          <input class="btn btn-outline-info" type="submit" value="Search" />
+        </div>
+      </div>
+    </form>
+  </div>
+
+  
+  {% if data %}
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Year</th>
+            <th>Publication Url</th>
+            <th>Profile Url</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in data %}
+            <tr>
+              <td>{{ d.title }}</td>
+              {% if d.author %}
+                <td>{{ d.author }}</td>
+              {% else %}
+                <td></td>
+              {% endif %}
+              {% if d.year %}
+                <td>{{ d.year }}</td>
+              {% else %}
+                <td></td>
+              {% endif %}
+              {% if d.publication_url %}
+                <td>
+                  <a href="{{ d.publication_url }}">Link</a>
+                </td>
+              {% else %}
+                <td></td>
+              {% endif %}
+              {% if d.profile_url %}
+                <td>
+                  <a href="{{ d.profile_url }}">Link</a>
+                </td>
+              {% else %}
+                <td></td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  
+  {% if results %}
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Year</th>
+            <th>Publication Url</th>
+            <th>Profile Url</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for result in results %}
+            <tr>
+              <td>{{ result.title }}</td>
+              {% if result.author %}
+                <td>{{ result.author }}</td>
+              {% else %}
+                <td></td>
+              {% endif %}
+              {% if result.year %}
+                <td>{{ result.year }}</td>
+              {% else %}
+                <td></td>
+              {% endif %}
+              {% if result.publication_url %}
+                <td>
+                  <a href="{{ result.publication_url }}">Link</a>
+                </td>
+              {% else %}
+                <td></td>
+              {% endif %}
+              {% if result.profile_url %}
+                <td>
+                  <a href="{{ result.profile_url }}">Link</a>
+                </td>
+              {% else %}
+                <td></td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+{% endblock %}
